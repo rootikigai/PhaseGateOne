@@ -12,40 +12,29 @@ function getAnyDateInput(promptUser){
         }
     }
 }
-//getAnyDateInput("Enter Date: ");
 
-function getNextPeriodDate(lastPeriodStartDate, averageCycleDays){
-//    lastPeriodStartDate = getAnyDateInput("Please, enter date when your last period started, in this format...STRICTLY! (YYYY-MM-DD): ");
-//    aveCycleDays = parseInt(prompt("Please enter your average days for your cycle length: "));
+function getNextPeriodDate(lastPeriodStartDate, aveCycleDays){
     let nextPeriodDate = new Date(lastPeriodStartDate);
     nextPeriodDate.setDate(nextPeriodDate.getDate() + aveCycleDays);
 
     return nextPeriodDate;
 }
-//getNextPeriodDate();
 
 function getOvulationDate(lastPeriodStartDate, aveCycleDays){
-//    lastPeriodStartDate = getAnyDateInput("Please, enter date when your last period started, in this format...STRICTLY! (YYYY-MM-DD): ");
-//    aveCycleDays = parseInt(prompt("Please enter your average days for your cycle length: "));
     let ovulationDate = new Date(lastPeriodStartDate);
     ovulationDate.setDate(ovulationDate.getDate() + (aveCycleDays - 14));
     return ovulationDate;
 }
-//getOvulationDate();
 
 function getFertilityPeriod(ovulationDate){
-//    ovulationDate = getAnyDateInput("Please, enter your ovulation date, in this format...STRICTLY! (YYYY-MM-DD): ");
     let startFertilityPeriod = new Date(ovulationDate);
     startFertilityPeriod.setDate(startFertilityPeriod.getDate() - 2)
     let endFertilityPeriod = new Date(ovulationDate);
     endFertilityPeriod.setDate(endFertilityPeriod.getDate() + 2);
     return {startFertilityPeriod, endFertilityPeriod}
 }
-//getFertilityPeriod();
 
 function getSafeDaysPeriod(lastPeriodStartDate, periodDays, fertilityPeriod, nextPeriodDate){
-//    lastPeriodStartDate = getAnyDateInput("Please, enter date when your last period started,\nin this format...STRICTLY! (YYYY-MM-DD): ");
-//    periodDays = parseInt(prompt("Please enter the number of days your period lasted: "));
     let periodEnd = new Date(lastPeriodStartDate);
     periodEnd.setDate(periodEnd.getDate() + periodDays);
     let safeBeforeFertStart = new Date(periodEnd);
@@ -54,8 +43,22 @@ function getSafeDaysPeriod(lastPeriodStartDate, periodDays, fertilityPeriod, nex
 
     let safeAfterFertEnd = new Date(fertilityPeriod.endFertilityPeriod);
     safeAfterFertEnd.setDate(safeAfterFertEnd.getDate() + 1)
-    let safeBeforeNextPeriod = new Date(nextPeriodStart);
+    let safeBeforeNextPeriod = new Date(nextPeriodDate);
     safeBeforeNextPeriod.setDate(safeBeforeNextPeriod.getDate() - 1);
 
     return {safeBeforeFertStart, safeBeforeFertEnd, safeAfterFertEnd, safeBeforeNextPeriod};
 }
+
+let lastPeriodStartDate = getAnyDateInput("Please, enter the date when your last period started (YYYY-MM-DD): ");
+let aveCycleDays = parseInt(prompt("Please enter your average cycle length in days: "));
+let periodDays = parseInt(prompt("Please enter the number of days your period lasts: "));
+let nextPeriodDate = getNextPeriodDate(lastPeriodStartDate, aveCycleDays);
+let ovulationDate = getOvulationDate(lastPeriodStartDate, aveCycleDays);
+let fertilityPeriod = getFertilityPeriod(ovulationDate);
+let safeDays = getSafeDaysPeriod(lastPeriodStartDate, periodDays, fertilityPeriod, nextPeriodDate);
+console.log("Next Period Date: " + nextPeriodDate.toDateString());
+console.log("Ovulation Date: " + ovulationDate.toDateString());
+console.log(`Fertility Period: ${fertilityPeriod.startFertilityPeriod.toDateString()} - ${fertilityPeriod.endFertilityPeriod.toDateString()}`);
+console.log(`Safe Days Period: ${safeDays.safeBeforeFertStart.toDateString()} - ${safeDays.safeBeforeFertEnd.toDateString()} and ${safeDays.safeAfterFertEnd.toDateString()} - ${safeDays.safeBeforeNextPeriod.toDateString()}`);
+
+
