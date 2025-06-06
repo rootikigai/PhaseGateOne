@@ -21,7 +21,7 @@ function getNextPeriodDate(lastPeriodStartDate, averageCycleDays){
     console.log(nextPeriodDate.toDateString())
 }
 getNextPeriodDate();
-*/
+
 function getOvulationDate(lastPeriodStartDate, aveCycleDays){
     lastPeriodStartDate = getAnyDateInput("Please, enter date when your last period started, in this format...STRICTLY! (YYYY-MM-DD): ");
     aveCycleDays = parseInt(prompt("Please enter your average days for your cycle length: "));
@@ -30,4 +30,13 @@ function getOvulationDate(lastPeriodStartDate, aveCycleDays){
     console.log(ovulationDate.toDateString());
 }
 getOvulationDate();
-
+*/
+function getFertilityPeriod(ovulationDate){
+    ovulationDate = getAnyDateInput("Please, enter your ovulation date, in this format...STRICTLY! (YYYY-MM-DD): ");
+    let startFertilityPeriod = new Date(ovulationDate);
+    startFertilityPeriod.setDate(startFertilityPeriod.getDate() - 2)
+    let endFertilityPeriod = new Date(ovulationDate);
+    endFertilityPeriod.setDate(endFertilityPeriod.getDate() + 2);
+    console.log((startFertilityPeriod.toDateString()) + " - " + (endFertilityPeriod.toDateString()))
+}
+getFertilityPeriod();
