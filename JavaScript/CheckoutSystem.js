@@ -29,7 +29,7 @@ function getItemPrice(qty, pricePerUnit){
 function getCartTotal(cart){
     let cartTotal = 0;
     for(let item of cart){
-        cartTotal += itemPrice;
+        cartTotal += item.qty * item.pricePerUnit;
     }
     return cartTotal;
 }
@@ -67,14 +67,14 @@ ITEM(s)         QTY         PRICE               TOTAL(NGN)
 ----------------------------------------------------------`
 //${item}       ${qty}    ${pricePerUnit}     ${getItemPrice()}
     for(let item of cart){
-        let ItemTotal = item.qty * item.pricePerUnit
+        let itemTotal = item.qty * item.pricePerUnit
         invoice += `${item.item.padEnd(10)} ${String(item.qty).padEnd(9)} ${String(item.pricePerUnit).padEnd(10)} ${itemTotal}`
     }
     invoice += `
 ----------------------------------------------------------
                             Sub Total:      ${cartTotal}
                             Discount:       ${discount}
-                            VAT @ 7.5%:     ${vat}
+                        VAT @ ${vatRate}%:  ${vat}
 ==========================================================
                             Bill Total:     ${netAmount}
 ==========================================================
@@ -83,10 +83,11 @@ console.log(invoice);
 }
 //getInvoice();
 
-function getBalance(amountPaid, netAmount){
-    let balance = netAmount - amountPaid;
+function getBalance(customerPay, netAmount){
+    let balance = customerPay - netAmount;
     return balance;
 }
+
 function getReceipt(invoice, amountPaid){
 
 }
@@ -94,22 +95,26 @@ function getReceipt(invoice, amountPaid){
 //...
 let customerName = prompt("Enter customer's name: ");
 let customerPhone = prompt("Enter customer's phoneNo.: ");
-let item = prompt("What did the customer buy?: ");
-let qty = parseInt(prompt(`How many quantities of ${item} did the customer buy:`));
-let pricePerUnit = parseFloat(prompt(`What is the unit price of ${item}: `));
-let cashierName = prompt("You are the cashier, enter your name: ");
-let cartTotal = getCartTotal(cart);
-let discountRate = parseFloat(prompt("Enter discount rate (if none, enter 0): "))
-let vatRate = parseFloat(prompt("Enter VAT rate: "))
-let customerPay = parseInt(prompt(`How much did ${customerName} give to you?: `));
-
-
 addCustomer(customerName, customerPhone);
+
+let item = prompt(`What did customer ${customerName} buy?: `);
+let qty = parseInt(prompt(`How many quantities of ${item} did customer ${customerName} buy: `));
+let pricePerUnit = parseFloat(prompt(`What is the unit price of ${item}: `));
 getItemPrice(qty, pricePerUnit);
 addToCart(item, qty, pricePerUnit);
+
+let cartTotal = getCartTotal(cart);
+
+let cashierName = prompt("You are the cashier, enter your name: ");
 addCashier(cashierName);
-giveDiscount(cartTotal, discountRate);
-takeVAT(amountAfterDiscount, vatRate);
-getNetAmount(cartTotal, discount, vat);
+
+let discountRate = parseFloat(prompt("Enter discount rate (if none, enter 0): "))
+let {discount, amountAfterDiscount} = giveDiscount(cartTotal, discountRate);
+let vatRate = parseFloat(prompt("Enter VAT rate: "));
+let {vat, amountAfterVAT} = takeVAT(amountAfterDiscount, vatRate);
+let netAmount = getNetAmount(cartTotal, discount, vat);
+let customerPay = parseFloat(prompt(`How much did customer ${customerName} give to you?: `));
+let balance = getBalance(customerPay, netAmount);
+
 getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount);
 getReceipt();
