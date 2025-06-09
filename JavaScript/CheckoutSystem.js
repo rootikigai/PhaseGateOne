@@ -22,10 +22,14 @@ function addCashier(cashierName){
     return cashiers.push(cashierName);
 }
 
+function getItemPrice(qty, pricePerUnit){
+    return qty * pricePerUnit;
+}
+
 function getCartTotal(cart){
     let cartTotal = 0;
     for(let item of cart){
-        cartTotal += item.qty * item.pricePerUnit;
+        cartTotal += itemPrice;
     }
     return cartTotal;
 }
@@ -48,8 +52,9 @@ function getNetAmount(cartTotal, discount, vat){
     return netAmount
 }
 
-function getInvoice(customer, cart, discountRate, vatRate){
+function getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount){
     let invoice = `
+____________________INVOICE_______________________________
 SEMICOLON STORES
 MAIN BRANCH
 LOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS.
@@ -57,11 +62,23 @@ TEL: 08089765432
 Date: ${(getCurrentDateTime())}
 Cashier: ${cashierName}
 Customer: ${customerName}   Ph.No: ${customerPhone}
-=======================================================
-                ITEM    QTY     PRICE       TOTAL(NGN)
--------------------------------------------------------
-        ${item}
-`
+==========================================================
+ITEM(s)         QTY         PRICE               TOTAL(NGN)
+----------------------------------------------------------`
+//${item}       ${qty}    ${pricePerUnit}     ${getItemPrice()}
+    for(let item of cart){
+        let ItemTotal = item.qty * item.pricePerUnit
+        invoice += `${item.item.padEnd(10)} ${String(item.qty).padEnd(9)} ${String(item.pricePerUnit).padEnd(10)} ${itemTotal}`
+    }
+    invoice += `
+----------------------------------------------------------
+                            Sub Total:      ${cartTotal}
+                            Discount:       ${discount}
+                            VAT @ 7.5%:     ${vat}
+==========================================================
+                            Bill Total:     ${netAmount}
+==========================================================
+`;
 console.log(invoice);
 }
 //getInvoice();
@@ -77,9 +94,22 @@ function getReceipt(invoice, amountPaid){
 //...
 let customerName = prompt("Enter customer's name: ");
 let customerPhone = prompt("Enter customer's phoneNo.: ");
-let item = prompt("What did the customer buy?: ")
-let cashierName = prompt("You are the cashier, enter your name: ")
-addCustomer();
-addCashier();
-getInvoice();
-addToCart();
+let item = prompt("What did the customer buy?: ");
+let qty = parseInt(prompt(`How many quantities of ${item} did the customer buy:`));
+let pricePerUnit = parseFloat(prompt(`What is the unit price of ${item}: `));
+let cashierName = prompt("You are the cashier, enter your name: ");
+let cartTotal = getCartTotal(cart);
+let discountRate = parseFloat(prompt("Enter discount rate (if none, enter 0): "))
+let vatRate = parseFloat(prompt("Enter VAT rate: "))
+let customerPay = parseInt(prompt(`How much did ${customerName} give to you?: `));
+
+
+addCustomer(customerName, customerPhone);
+getItemPrice(qty, pricePerUnit);
+addToCart(item, qty, pricePerUnit);
+addCashier(cashierName);
+giveDiscount(cartTotal, discountRate);
+takeVAT(amountAfterDiscount, vatRate);
+getNetAmount(cartTotal, discount, vat);
+getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount);
+getReceipt();
