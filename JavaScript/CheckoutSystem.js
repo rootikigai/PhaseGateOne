@@ -2,7 +2,6 @@ const prompt = require("prompt-sync")();
 const now = new Date();
 
 let customers = [];
-let cart = [];
 let cashiers = [];
 
 
@@ -13,11 +12,11 @@ function getCurrentDateTime(){
 function addCustomer(customerName, customerPhone){
     return customers.push({customerName, customerPhone});
 }
-
+/*
 function addToCart(item, qty, pricePerUnit){
     return cart.push({item, qty, pricePerUnit});
 }
-
+*/
 function addCashier(cashierName){
     return cashiers.push(cashierName);
 }
@@ -64,11 +63,10 @@ Cashier: ${cashierName}
 Customer: ${customerName}   Ph.No: ${customerPhone}
 ==========================================================
 ITEM(s)         QTY         PRICE               TOTAL(NGN)
-----------------------------------------------------------`
-//${item}       ${qty}    ${pricePerUnit}     ${getItemPrice()}
+
     for(let item of cart){
-        let itemTotal = item.qty * item.pricePerUnit
-        invoice += `${item.item.padEnd(10)} ${String(item.qty).padEnd(9)} ${String(item.pricePerUnit).padEnd(10)} ${itemTotal}`
+        let itemTotal = item.qty * item.pricePer----------------------------------------------------------`Unit
+        invoice += `\n${item.item.padEnd(18)} ${String(item.qty).padEnd(9)} ${String(item.pricePerUnit).padEnd(10)} ${itemTotal}`
     }
     invoice += `
 ----------------------------------------------------------
@@ -93,28 +91,47 @@ function getReceipt(invoice, amountPaid){
 }
 
 //...
-let customerName = prompt("Enter customer's name: ");
-let customerPhone = prompt("Enter customer's phoneNo.: ");
-addCustomer(customerName, customerPhone);
+while(true){
+    let cart = [];
+    let customerName = prompt("Enter customer's name: ");
+    let customerPhone = prompt("Enter customer's phoneNo.: ");
+    addCustomer(customerName, customerPhone);
 
-let item = prompt(`What did customer ${customerName} buy?: `);
-let qty = parseInt(prompt(`How many quantities of ${item} did customer ${customerName} buy: `));
-let pricePerUnit = parseFloat(prompt(`What is the unit price of ${item}: `));
-getItemPrice(qty, pricePerUnit);
-addToCart(item, qty, pricePerUnit);
+let nav = "yes";
+    while(true){
+        let item = prompt(`What did customer ${customerName} buy?: `);
+        let qty = parseInt(prompt(`How many quantities of ${item} did customer ${customerName} buy: `));
+        let pricePerUnit = parseFloat(prompt(`What is the unit price of ${item}: `));
+        cart.push({item, qty, pricePerUnit});
+        nav = prompt("Add more items?(yes or no): ").toLowerCase();
+        if(nav === "no"){
+            break;
+        }
+    }
 
-let cartTotal = getCartTotal(cart);
+    let cartTotal = getCartTotal(cart);
 
-let cashierName = prompt("You are the cashier, enter your name: ");
-addCashier(cashierName);
+    let cashierName = prompt("You are the cashier, enter your name: ");
+    addCashier(cashierName);
 
-let discountRate = parseFloat(prompt("Enter discount rate (if none, enter 0): "))
-let {discount, amountAfterDiscount} = giveDiscount(cartTotal, discountRate);
-let vatRate = parseFloat(prompt("Enter VAT rate: "));
-let {vat, amountAfterVAT} = takeVAT(amountAfterDiscount, vatRate);
-let netAmount = getNetAmount(cartTotal, discount, vat);
-let customerPay = parseFloat(prompt(`How much did customer ${customerName} give to you?: `));
-let balance = getBalance(customerPay, netAmount);
+    let discountRate = parseFloat(prompt("Enter discount rate (if none, enter 0): "))
+    let {discount, amountAfterDiscount} = giveDiscount(cartTotal, discountRate);
+    let vatRate = parseFloat(prompt("Enter VAT rate: "));
+    let {vat, amountAfterVAT} = takeVAT(amountAfterDiscount, vatRate);
+    let netAmount = getNetAmount(cartTotal, discount, vat);
+    let customerPay = parseFloat(prompt(`How much did customer ${customerName} give to you?: `));
+    let balance = getBalance(customerPay, netAmount);
 
-getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount);
-getReceipt();
+    getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount);
+    getReceipt();
+
+    console.log(`Customer Paid: ${customerPay}`);
+    console.log(`Balance: ${balance}`);
+
+    let anotherCustomer = prompt("Serve another customer? (yes/no): ").toLowerCase();
+    if (anotherCustomer !== "yes") {
+        console.log("Closing register... Goodbye!");
+        break;
+    }
+    
+}
