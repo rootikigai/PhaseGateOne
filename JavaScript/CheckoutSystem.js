@@ -63,9 +63,10 @@ Cashier: ${cashierName}
 Customer: ${customerName}   Ph.No: ${customerPhone}
 ==========================================================
 ITEM(s)         QTY         PRICE               TOTAL(NGN)
-
+`;
     for(let item of cart){
-        let itemTotal = item.qty * item.pricePer----------------------------------------------------------`Unit
+        let itemTotal = item.qty * item.pricePerUnit;
+`----------------------------------------------------------`
         invoice += `\n${item.item.padEnd(18)} ${String(item.qty).padEnd(9)} ${String(item.pricePerUnit).padEnd(10)} ${itemTotal}`
     }
     invoice += `
@@ -76,18 +77,49 @@ ITEM(s)         QTY         PRICE               TOTAL(NGN)
 ==========================================================
                             Bill Total:     ${netAmount}
 ==========================================================
+        THIS IS NOT A RECEIPT. KINDLY PAY ${netAmount}
+==========================================================
 `;
-console.log(invoice);
+    console.log(invoice);
 }
-//getInvoice();
 
 function getBalance(customerPay, netAmount){
     let balance = customerPay - netAmount;
     return balance;
 }
 
-function getReceipt(invoice, amountPaid){
-
+function getReceipt(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount, customerPay, balance){
+    let receipt = `
+________________________RECEIPT___________________________
+SEMICOLON STORES
+MAIN BRANCH
+LOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS.
+TEL: 08089765432
+Date: ${(getCurrentDateTime())}
+Cashier: ${cashierName}
+Customer: ${customerName}   Ph.No: ${customerPhone}
+==========================================================
+ITEM(s)         QTY         PRICE               TOTAL(NGN)
+`;
+    for(let item of cart){
+        let itemTotal = item.qty * item.pricePerUnit;
+`----------------------------------------------------------`
+        receipt += `\n${item.item.padEnd(18)} ${String(item.qty).padEnd(9)} ${String(item.pricePerUnit).padEnd(10)} ${itemTotal}`
+    }
+    receipt += `
+----------------------------------------------------------
+                            Sub Total:      ${cartTotal}
+                            Discount:       ${discount}
+                        VAT @ ${vatRate}%:  ${vat}
+==========================================================
+                            Bill Total:     ${netAmount}
+                            Amount Paid:    ${customerPay}
+                            Balance:        ${balance}
+==========================================================
+                THANK YOU FOR YOUR PATRONAGE
+==========================================================
+`;
+    console.log(receipt);
 }
 
 //...
@@ -119,19 +151,20 @@ let nav = "yes";
     let vatRate = parseFloat(prompt("Enter VAT rate: "));
     let {vat, amountAfterVAT} = takeVAT(amountAfterDiscount, vatRate);
     let netAmount = getNetAmount(cartTotal, discount, vat);
+
+    getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount);
+
     let customerPay = parseFloat(prompt(`How much did customer ${customerName} give to you?: `));
     let balance = getBalance(customerPay, netAmount);
 
-    getInvoice(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount);
-    getReceipt();
+    getReceipt(customerName, customerPhone, cashierName, cart, cartTotal, discountRate, discount, vatRate, vat, netAmount, customerPay, balance);
 
-    console.log(`Customer Paid: ${customerPay}`);
-    console.log(`Balance: ${balance}`);
+//    console.log(`Customer Paid: ${customerPay}`);
+//    console.log(`Balance: ${balance}`);
 
     let anotherCustomer = prompt("Serve another customer? (yes/no): ").toLowerCase();
-    if (anotherCustomer !== "yes") {
+    if(anotherCustomer !== "yes"){
         console.log("Closing register... Goodbye!");
         break;
     }
-    
 }
