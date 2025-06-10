@@ -1,4 +1,5 @@
 from datetime import datetime
+from datetime import timedelta
 
 customers = []
 cashiers = []
@@ -32,4 +33,12 @@ def take_vat(amount_after_discount, vat_rate):
     vat = amount_after_discount * (vat_rate / 100)
     amount_after_vat = amount_after_discount + vat
     return vat, amount_after_vat
+
+def get_net_amount(cart_total, discount, vat):
+    net_amount = (cart_total - discount) + vat
+    return net_amount
+
+def get_invoice(customer_name, customer_phone, cashier_name, cart, cart_total, discount_rate, discount, vat_rate, vat, net_amount):
+    print("_______________________INVOICE______________________________")
+    print("SEMICOLON STORES\nMAIN BRANCH\nLOCATION: 312, HERBERT MACAULAY WAY, SABO YABA, LAGOS.\nTEL: 08089765432")
 
