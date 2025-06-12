@@ -129,7 +129,7 @@ while(true){
     let customerPhone = prompt("Enter customer's phoneNo.: ");
     addCustomer(customerName, customerPhone);
 
-let nav = "yes";
+    let nav = "yes";
     while(true){
         let item = prompt(`What did customer ${customerName} buy?: `);
         let qty = parseInt(prompt(`How many quantities of ${item} did customer ${customerName} buy: `));
@@ -168,3 +168,4 @@ let nav = "yes";
         break;
     }
 }
+
