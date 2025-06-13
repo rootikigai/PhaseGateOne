@@ -48,7 +48,7 @@ function answerChoice(){
 
 function intj(){
     if(introverted > extroverted && intuitive > sensing && thinking > feeling && judging > perceptive){
-        resultINTJ = console.log(`Hey ${name}, the results are in!
+        resultINTJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: An Architect - INTJ (Introverted, Intuitive, Thinking, Judging)
 
@@ -77,7 +77,7 @@ Famous INTJs: Elon Musk, Hillary Clinton, and Arnold Schwarzenegger
 
 function intp(){
     if(introverted > extroverted && intuitive > sensing && thinking > feeling && judging < perceptive){
-        resultINTP = console.log(`Hey ${name}, the results are in!
+        resultINTP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Logician - INTP (Introverted, Intuitive, Thinking, Perceptive)
 
@@ -106,7 +106,7 @@ Famous INTPs: Albert Einstein, Bill Gates, and Charles Darwin
 
 function entj(){
     if(introverted < extroverted && intuitive > sensing && thinking > feeling && judging > perceptive){
-        resultENTJ = console.log(`Hey ${name}, the results are in!
+        resultENTJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Commander - ENTJ (Extroverted, Intuitive, Thinking, Judging)
 
@@ -135,7 +135,7 @@ Famous ENTJs: Steve Jobs, Margaret Thatcher, and Napoleon Bonaparte
 
 function entp(){
     if(introverted < extroverted && intuitive > sensing && thinking > feeling && judging < perceptive){
-        resultENTP = console.log(`Hey ${name}, the results are in!
+        resultENTP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Debater - ENTP (Extroverted, Intuitive, Thinking, Perceptive)
 
@@ -164,7 +164,7 @@ Famous ENTPs: Thomas Edison, Leonardo da Vinci, and Mark Twain
 
 function infj(){
     if(introverted > extroverted && intuitive > sensing && thinking < feeling && judging > perceptive){
-        resultINFJ = console.log(`Hey ${name}, the results are in!
+        resultINFJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: An Advocate - INFJ (Introverted, Intuitive, Feeling, Judging)
 
@@ -193,7 +193,7 @@ Famous INFJs: Martin Luther King Jr., Nelson Mandela, and J.K. Rowling
 
 function infp(){
     if(introverted > extroverted && intuitive > sensing && thinking < feeling && judging < perceptive){
-        resultINFP = console.log(`Hey ${name}, the results are in!
+        resultINFP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Mediator - INFP (Introverted, Intuitive, Feeling, Perceptive)
 
@@ -222,7 +222,7 @@ Famous INFPs: William Shakespeare, Audrey Hepburn, and John Lennon
 
 function enfj(){
     if(introverted < extroverted && intuitive > sensing && thinking < feeling && judging > perceptive){
-        resultENFJ = console.log(`Hey ${name}, the results are in!
+        resultENFJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Protagonist - ENFJ (Extroverted, Intuitive, Feeling, Judging)
 
@@ -251,7 +251,7 @@ Famous ENFJs: Barack Obama, Oprah Winfrey, and Jennifer Lawrence
 
 function enfp(){
     if(introverted < extroverted && intuitive > sensing && thinking < feeling && judging < perceptive){
-        resultENFP = console.log(`Hey ${name}, the results are in!
+        resultENFP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Campaigner - ENFP (Extroverted, Intuitive, Feeling, Perceptive)
 
@@ -280,7 +280,7 @@ Famous ENFPs: Robin Williams, Ellen DeGeneres, and Walt Disney
 
 function istj(){
     if(introverted > extroverted && intuitive < sensing && thinking > feeling && judging > perceptive){
-        resultISTJ = console.log(`Hey ${name}, the results are in!
+        resultISTJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Logistician - ISTJ (Introverted, Sensing, Thinking, Judging)
 
@@ -309,7 +309,7 @@ Famous ISTJs: George Washington, Angela Merkel, and Queen Elizabeth II
 
 function isfj(){
     if(introverted > extroverted && intuitive < sensing && thinking < feeling && judging > perceptive){
-        resultISTJ = console.log(`Hey ${name}, the results are in!
+        resultISTJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Defender - ISFJ (Introverted, Sensing, Feeling, Judging)
 
@@ -338,7 +338,7 @@ Famous ISFJs: Mother Teresa, Rosa Parks, and Kate Middleton
 
 function estj(){
     if(introverted < extroverted && intuitive < sensing && thinking > feeling && judging > perceptive){
-        resultESTJ = console.log(`Hey ${name}, the results are in!
+        resultESTJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: An Executive - ESTJ (Extroverted, Sensing, Thinking, Judging)
 
@@ -367,7 +367,7 @@ Famous ESTJs: Winston Churchill, Margaret Thatcher, and Judge Judy
 
 function esfj(){
     if(introverted < extroverted && intuitive < sensing && thinking < feeling && judging > perceptive){
-        resultESFJ = console.log(`Hey ${name}, the results are in!
+        resultESFJ = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Consul - ESFJ (Extroverted, Sensing, Feeling, Judging)
 
@@ -396,7 +396,7 @@ Famous ESFJs: Taylor Swift, Jennifer Garner, and Bill Clinton
 
 function istp(){
     if(introverted > extroverted && intuitive < sensing && thinking > feeling && judging < perceptive){
-        resultISTP = console.log(`Hey ${name}, the results are in!
+        resultISTP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: A Virtuoso - ISTP (Introverted, Sensing, Thinking, Perceptive)
 
@@ -425,7 +425,7 @@ Famous ISTPs: Clint Eastwood, Amelia Earhart, and Michael Jordan
 
 function isfp(){
     if(introverted > extroverted && intuitive < sensing && thinking < feeling && judging < perceptive){
-        resultISFP = console.log(`Hey ${name}, the results are in!
+        resultISFP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: An Adventurer - ISFP (Introverted, Sensing, Feeling, Perceptive)
 
@@ -454,7 +454,7 @@ Famous ISFPs: Marilyn Monroe, Bob Dylan, and Princess Diana
 
 function estp(){
     if(introverted < extroverted && intuitive < sensing && thinking > feeling && judging < perceptive){
-        resultESTP = console.log(`Hey ${name}, the results are in!
+        resultESTP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: An Entrepreneur - ESTP (Extroverted, Sensing, Thinking, Perceptive)
 
@@ -483,7 +483,7 @@ Famous ESTPs: Ernest Hemingway, Donald Trump, and Madonna
 
 function esfp(){
     if(introverted < extroverted && intuitive < sensing && thinking < feeling && judging < perceptive){
-        resultESFP = console.log(`Hey ${name}, the results are in!
+        resultESFP = console.log(`And now  ${name}, the results are in!
 ======================================================
 You are: An Entrepreneur - ESFP (Extroverted, Sensing, Thinking, Perceptive)
 
@@ -698,7 +698,22 @@ else if (choice === "b"){
 console.log
 
 
-console.log(countA, countB, extroverted, introverted, sensing, intuitive, thinking, feeling, judging, perceptive);
+console.log(`Here are the number of choices you made ${name}:
+Number of As you picked: ${countA} / 20
+Number of Bs you picked: ${countB} / 20
+
+What that translates to:
+========================
+
+Extroverted = ${extroverted} / 5
+Introverted = ${introverted} / 5
+Sensing = ${sensing} / 5
+Intuitive = ${intuitive} / 5
+Thinking = ${thinking} / 5
+Feeling = ${feeling} / 5
+Judging = ${judging} / 5
+Perception = ${perceptive} / 5
+=========================`);
 
 
 intj();
