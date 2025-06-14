@@ -1,0 +1,12 @@
+name = ""
+choice = ""
+countA = 0;
+countB = 0;
+extroverted = 0
+introverted = 0
+sensing = 0
+intuitive = 0
+thinking = 0
+feeling = 0
+judging = 0
+perceptive = 0
