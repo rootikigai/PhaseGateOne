@@ -1,4 +1,5 @@
-from checkout_system import get_item_price, get_cart_total
+import unittest
+from checkout_system import get_item_price, get_cart_total, give_discount, take_vat
 from unittest import TestCase
 
 class TestCheckoutSystemFunctions(TestCase):
@@ -24,3 +25,13 @@ class TestCheckoutSystemFunctions(TestCase):
         actual = amount_after_discount
         expected = 1665
         self.assertEqual(actual, expected)
+
+    def test_that_take_vat_function_works(self):
+        amount_after_discount = 1665
+        vat_rate = (10 / 100)
+        actual = amount_after_discount * vat_rate
+        expected = 166.5
+        self.assertEqual(actual, expected)
+        
+#if __name__ == '__main__':
+    unittest.main()
