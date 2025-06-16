@@ -1,13 +1,14 @@
 const prompt = require("prompt-sync")();
 
 let contacts = [];
-let searchContact = [];
 let firstName;
 let lastName;
 let phone;
+let search;
+let nav;
 
 function addContact(firstName, lastName, phone){
-    contact = {
+    let contact = {
         firstName: firstName,
         lastName: lastName,
         phone: phone
@@ -28,6 +29,7 @@ function removeContact(search){
 }
 
 function findContact(search){
+    let searchContact = [];
     for(let i = 0; i < contacts.length; i++){
         let contact = contacts[i];
     
@@ -45,7 +47,7 @@ function editContact(search, newFirstName, newLastName, newPhone){
     if(contact.firstName === search || contact.lastName === search || contact.phone === search){
         contact.firstName = newFirstName;
         contact.lastName = newLastName;
-        contact.phone = newphone;
+        contact.phone = newPhone;
 
         console.log("Contact updated.");
         return;
@@ -64,8 +66,8 @@ console.log(found);
 //console.log(contacts)
 */
 
-
-let menu = prompt(`
+while(true){
+    let menu = prompt(`
 =====================================================
                         PHONEBOOK
 =====================================================
@@ -81,22 +83,74 @@ perform an operation.
 Your choice: 
 `);
 
-//while(true){
-    switch(menu){
-        case "1":
-            console.log(`
+    if(menu === "5"){
+        console.log("Exiting Phonebook...");
+        break;
+    }
+    else{
+        switch(menu){
+            case "1":
+                while(true){
+                    console.log(`
 +++++++++++
 ADD CONTACT
 +++++++++++
 `);
-            firstName = prompt("Enter the contact's first name: ");
-            lastName = prompt("Enter the contact's last name: ");
-            phone = prompt("Enter the contact's phone number: ");
-            addContact(firstName, lastName, phone)
-            console.log(contacts)
-            break;
+                    firstName = prompt("Enter the contact's first name: ");
+                    lastName = prompt("Enter the contact's last name: ");
+                    phone = prompt("Enter the contact's phone number: ");
+                    addContact(firstName, lastName, phone)
+                    console.log(contacts)
+                    nav = prompt("Press 0 to go back to main menu or 1 to ad another contact: ");
+                    if(nav === "0"){
+                        break;
+                    }
+                }
+                break;
 
-        case "2":
-            
+            case "2":
+                console.log(`
+--------------
+REMOVE CONTACT
+--------------
+`);
+                let search = prompt("Enter the contact's first name, last name or phone number to search: ").toLowerCase();
+                removeContact(search);
+                console.log(contacts)
+                break;
+
+            case "3":
+                console.log(`
+!!!!!!!!!!!!
+FIND CONTACT
+!!!!!!!!!!!!
+`);
+                search = prompt("Enter name or number to find: ");
+                let results = findContact(find);
+                if (results.length > 0) {
+                    console.log("Contact(s) found:");
+                    console.log(results);
+                } else {
+                    console.log("No contact found.");
+                }
+                break;
+
+            case "4":
+                console.log(`
+............
+EDIT CONTACT
+............
+`);
+                search = prompt("Enter name or number to search for contact: ");
+                let newFirst = prompt("Enter new first name or leave as is: ");
+                let newLast = prompt("Enter new last name or leave as is: ");
+                let newPhone = prompt("Enter new phone number or leave as is: ");
+                editContact(search, newFirst, newLast, newPhone);
+                break;
+
+            default:
+                console.log("That's an invalid input. Try again");
+
+        }
     }
-//}
+}
