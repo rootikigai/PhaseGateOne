@@ -5,6 +5,7 @@ public class LagbajaStudentGradeMain{
     Scanner input = new Scanner(System.in);
     int numOfStudents = 0;
     int numOfSubjects = 0;
+    int studentScore = 0;
     int[][] studentScores = new int[numOfStudents][numOfSubjects];
     int[] overallTotalScores = new int[numOfStudents];
     int[] totalPerSub = new int[numOfSubjects];
@@ -14,12 +15,13 @@ public class LagbajaStudentGradeMain{
     numOfStudents = input.nextInt();
     System.out.print("How many subjects do they offer?");
     numOfSubjects = input.nextInt();
-    System.out.print("Saving >>>>>>>>>>>>>>>>>>");
-    System.out.print("Saved Successfully");
+    System.out.println("Saving >>>>>>>>>>>>>>>>>>");
+    System.out.println("Saved Successfully");
     for(int student = 0; student < numOfStudents; student++){
       System.out.println("Entering score for student " + (student + 1));
       for(int subject = 0; subject < numOfSubjects; subject++){
-        System.out.println("Enter score for subject " + (subject + 1) + "\nSaving >>>>>>>>>>>>>>>>\nSaved successfully");
+        System.out.println("Enter score for subject " + (subject + 1) + " (0 - 100): ");
+        studentScore = input.nextInt();
       }
     }
     
