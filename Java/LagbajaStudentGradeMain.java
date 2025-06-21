@@ -8,7 +8,7 @@ public class LagbajaStudentGradeMain{
     int studentScore = 0;
     int[][] studentScores = new int[numOfStudents][numOfSubjects];
     int[] overallTotalScores = new int[numOfStudents];
-    int[] totalPerSub = new int[numOfSubjects];
+    int[] overallSubjectTotal = new int[numOfSubjects];
     int[] totalPasses = new int[numOfSubjects];
     int[] totalFails = new int[numOfSubjects];
     System.out.print("How many students do you have?");
@@ -23,8 +23,16 @@ public class LagbajaStudentGradeMain{
         System.out.println("Enter score for subject " + (subject + 1) + " (0 - 100): ");
         studentScore = input.nextInt();
       }
+      overallTotalScores[student] += studentScore;
+      overallSubjectTotal[subject] += studentScore;
+      if(studentScore > 50){
+        totalPasses[subject]++;
+      }
+      else{
+        totalFails[subject]++;
+      }
     }
-    
+    //average
     
   }
 }
