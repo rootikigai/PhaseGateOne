@@ -32,7 +32,7 @@ public class LagbajaStudentGradeMain{
         totalFails[subject]++;
       }
     }
-    
+    //average
     
   }
 }
